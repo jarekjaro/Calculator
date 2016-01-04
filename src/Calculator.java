@@ -28,15 +28,15 @@ public class Calculator {
         String[] tokens = expressionToTest.split("");
         Stack<String> stack = new Stack();
         boolean result = true;
-        for (int i = 0; i < tokens.length; i++) {
-            if (tokens[i].equals("(") || tokens[i].equals("[") ||
-                    tokens[i].equals("{")) {
-                stack.push(tokens[i]);
-            } else if (tokens[i].matches(allowedCharacters)) {
+        for (String token : tokens) {
+            if (token.equals("(") || token.equals("[") ||
+                    token.equals("{")) {
+                stack.push(token);
+            } else if (token.matches(allowedCharacters)) {
                 continue;
             } else {
                 if (!stack.isEmpty() &&
-                        parenthesis.get(tokens[i]).equals(stack.peek())) {
+                        parenthesis.get(token).equals(stack.peek())) {
                     stack.pop();
                 } else {
                     result = false;
@@ -67,7 +67,6 @@ public class Calculator {
             }
             //converting expression in parenthesis
             if (Character.toString(expressionAsCharArray[i]).equals(")")) {
-
                 tokensStack.pop();//removing ")"
                 do {
                     innerExpressionString = tokensStack.pop() + innerExpressionString;
